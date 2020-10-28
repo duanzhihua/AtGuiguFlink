@@ -15,8 +15,8 @@ import java.util.*;
  */
 public class TopNHotItems extends KeyedProcessFunction<Tuple, ItemViewCount,String> {
 
-    private ListState<ItemViewCount> itemState;
-    private int topSize = 6;
+    ListState<ItemViewCount> itemState;
+    int topSize = 6;
     @Override
     public void open(Configuration configuration) throws Exception {
         super.open(configuration);

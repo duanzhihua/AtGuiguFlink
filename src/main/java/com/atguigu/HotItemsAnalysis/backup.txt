@@ -1,0 +1,25 @@
+   new AssignerWithPeriodicWatermarks<UserBehavior>() {
+             Long currentMaxTimestamp = 0L;
+             final Long maxOutOfOrderness = 1000L;
+             SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss.SSS");
+             /*
+             * 定义生成Watermark的逻辑
+             * 默认100ms被调用一次
+             */
+            @Nullable
+            @Override
+            public Watermark getCurrentWatermark() {
+                return new Watermark(currentMaxTimestamp - maxOutOfOrderness);
+            }
+
+            //定义如何提取timestamp
+            @Override
+            public long extractTimestamp(UserBehavior userBehavior, long l) {
+                long timestamp = userBehavior.timestamp;
+                currentMaxTimestamp = Math.max(timestamp,currentMaxTimestamp);
+                System.out.println("itemId:"+userBehavior.itemId+",eventTime:"+userBehavior.timestamp+
+                        ",currentMaxTimestamp:["+currentMaxTimestamp+"|"+sdf.format(currentMaxTimestamp)+"],watemark:"
+                        +getCurrentWatermark().getTimestamp()+"|"+sdf.format(getCurrentWatermark().getTimestamp())+"]");
+                return timestamp;
+            }
+    };

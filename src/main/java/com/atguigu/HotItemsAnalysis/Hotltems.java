@@ -1,6 +1,7 @@
 package com.atguigu.HotItemsAnalysis;
 
 import com.atguigu.HotItemsAnalysis.selfFunction.*;
+import com.atguigu.LoginFailDetect.LoginEvent;
 import org.apache.flink.api.common.eventtime.AscendingTimestampsWatermarks;
 import org.apache.flink.api.common.eventtime.WatermarkGenerator;
 import org.apache.flink.api.common.eventtime.WatermarkGeneratorSupplier;
@@ -15,6 +16,7 @@ import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.AscendingTimestampExtractor;
 import org.apache.flink.streaming.api.functions.AssignerWithPeriodicWatermarks;
+import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrdernessTimestampExtractor;
 import org.apache.flink.streaming.api.watermark.Watermark;
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
@@ -22,6 +24,7 @@ import org.apache.flink.streaming.runtime.operators.util.AssignerWithPeriodicWat
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 
 import javax.annotation.Nullable;
+import java.text.SimpleDateFormat;
 import java.util.Properties;
 
 public class Hotltems {
@@ -45,16 +48,10 @@ public class Hotltems {
                 //System.out.println(userBehavior);
                 return userBehavior;
             }
-        }).assignTimestampsAndWatermarks(new AssignerWithPeriodicWatermarks<UserBehavior>() {
-            @Nullable
+        }).assignTimestampsAndWatermarks(new AscendingTimestampExtractor<UserBehavior>() {
             @Override
-            public Watermark getCurrentWatermark() {
-                return null;
-            }
-
-            @Override
-            public long extractTimestamp(UserBehavior userBehavior, long l) {
-                return 0;
+            public long extractAscendingTimestamp(UserBehavior userBehavior) {
+                return userBehavior.timestamp*1000L;
             }
         });
 
@@ -63,7 +60,7 @@ public class Hotltems {
                 .filter(new FilterFunction<UserBehavior>() {
                     @Override
                     public boolean filter(UserBehavior value) throws Exception {
-                        return value.behavior.equals("pv");
+                        return value.behavior == "pv";
                     }
                 }).keyBy("itemId").timeWindow(Time.hours(1),Time.minutes(5))    //设置滑动窗口及逆行统计
                 .aggregate(new CountAgg(),new ItemViewWindowResult());          //windowStream的方法，有返回一个dataStream
@@ -78,3 +75,6 @@ public class Hotltems {
     }
 
 }
+
+
+
