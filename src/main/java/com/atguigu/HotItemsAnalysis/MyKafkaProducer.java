@@ -16,7 +16,7 @@ public class MyKafkaProducer {
         BufferedReader buffer = new BufferedReader(new FileReader("D:\\IDEAWorkplace\\AtGuiguFlink\\src\\main\\resources\\UserBehavior.csv"));
         String line = null;
         while ((line = buffer.readLine()) != null){
-            System.out.println(line);
+            //System.out.println(line);
             ProducerRecord record = new ProducerRecord(topic,line);
             producer.send(record);
         }

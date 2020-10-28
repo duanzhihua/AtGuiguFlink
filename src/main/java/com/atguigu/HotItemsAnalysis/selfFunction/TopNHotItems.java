@@ -50,6 +50,7 @@ public class TopNHotItems extends KeyedProcessFunction<Tuple, ItemViewCount,Stri
                 return (int)(o1.count - o2.count);
             }
         });
+        Collections.reverse(allItems);
         List<ItemViewCount> sorted = allItems.subList(0,topSize);
         //将排名信息格式化为String，便于打印
         StringBuilder result = new StringBuilder();

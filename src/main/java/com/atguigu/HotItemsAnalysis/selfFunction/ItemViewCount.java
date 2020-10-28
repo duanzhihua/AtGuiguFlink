@@ -11,4 +11,13 @@ public class ItemViewCount {
         this.windowEnd = windowEnd;
         this.count = count;
     }
+
+    @Override
+    public String toString() {
+        return "ItemViewCount{" +
+                "itemId=" + itemId +
+                ", windowEnd=" + windowEnd +
+                ", count=" + count +
+                '}';
+    }
 }

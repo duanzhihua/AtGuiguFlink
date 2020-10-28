@@ -15,4 +15,15 @@ public class UserBehavior {
         this.behavior = behavior;
         this.timestamp = timestamp;
     }
+
+    @Override
+    public String toString() {
+        return "UserBehavior{" +
+                "userId=" + userId +
+                ", itemId=" + itemId +
+                ", categoryId=" + categoryId +
+                ", behavior='" + behavior + '\'' +
+                ", timestamp=" + timestamp +
+                '}';
+    }
 }
