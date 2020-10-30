@@ -1,5 +1,6 @@
-package com.atguigu.HotItemsAnalysis.selfFunction;
+package com.atguigu.HotItemsAnalysis.window;
 
+import com.atguigu.HotItemsAnalysis.domain.ItemViewCount;
 import org.apache.flink.api.java.tuple.*;
 import org.apache.flink.streaming.api.functions.windowing.WindowFunction;
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;

@@ -1,11 +1,10 @@
 package com.atguigu.HotItemsAnalysis;
 
-import com.atguigu.HotItemsAnalysis.selfFunction.*;
-import com.atguigu.LoginFailDetect.LoginEvent;
-import org.apache.flink.api.common.eventtime.AscendingTimestampsWatermarks;
-import org.apache.flink.api.common.eventtime.WatermarkGenerator;
-import org.apache.flink.api.common.eventtime.WatermarkGeneratorSupplier;
-import org.apache.flink.api.common.eventtime.WatermarkStrategy;
+import com.atguigu.HotItemsAnalysis.aggregate.CountAgg;
+import com.atguigu.HotItemsAnalysis.domain.ItemViewCount;
+import com.atguigu.HotItemsAnalysis.domain.UserBehavior;
+import com.atguigu.HotItemsAnalysis.process.TopNHotItems;
+import com.atguigu.HotItemsAnalysis.window.*;
 import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
@@ -15,16 +14,9 @@ import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.AscendingTimestampExtractor;
-import org.apache.flink.streaming.api.functions.AssignerWithPeriodicWatermarks;
-import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrdernessTimestampExtractor;
-import org.apache.flink.streaming.api.watermark.Watermark;
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
-import org.apache.flink.streaming.runtime.operators.util.AssignerWithPeriodicWatermarksAdapter;
-import org.apache.kafka.clients.consumer.ConsumerConfig;
 
-import javax.annotation.Nullable;
-import java.text.SimpleDateFormat;
 import java.util.Properties;
 
 public class Hotltems {
@@ -60,7 +52,7 @@ public class Hotltems {
                 .filter(new FilterFunction<UserBehavior>() {
                     @Override
                     public boolean filter(UserBehavior value) throws Exception {
-                        return value.behavior == "pv";
+                        return value.behavior .equals("pv");
                     }
                 }).keyBy("itemId").timeWindow(Time.hours(1),Time.minutes(5))    //设置滑动窗口及逆行统计
                 .aggregate(new CountAgg(),new ItemViewWindowResult());          //windowStream的方法，有返回一个dataStream

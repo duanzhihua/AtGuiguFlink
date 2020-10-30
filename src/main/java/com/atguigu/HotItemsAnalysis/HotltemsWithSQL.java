@@ -1,6 +1,6 @@
 package com.atguigu.HotItemsAnalysis;
 
-import com.atguigu.HotItemsAnalysis.selfFunction.UserBehavior;
+import com.atguigu.HotItemsAnalysis.domain.UserBehavior;
 import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.streaming.api.TimeCharacteristic;
@@ -9,8 +9,7 @@ import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.table.api.EnvironmentSettings;
 import org.apache.flink.table.api.Table;
-import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
-import org.omg.CORBA.Environment;
+import org.apache.flink.table.api.java.StreamTableEnvironment;
 
 public class HotltemsWithSQL {
     public static void main(String[] args){

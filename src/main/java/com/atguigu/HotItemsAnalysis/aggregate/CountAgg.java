@@ -1,5 +1,6 @@
-package com.atguigu.HotItemsAnalysis.selfFunction;
+package com.atguigu.HotItemsAnalysis.aggregate;
 
+import com.atguigu.HotItemsAnalysis.domain.UserBehavior;
 import org.apache.flink.api.common.functions.AggregateFunction;
 
 public class CountAgg implements AggregateFunction<UserBehavior,Long,Long> {

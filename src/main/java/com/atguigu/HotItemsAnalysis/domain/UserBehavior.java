@@ -1,4 +1,4 @@
-package com.atguigu.HotItemsAnalysis.selfFunction;
+package com.atguigu.HotItemsAnalysis.domain;
 
 public class UserBehavior {
     public Long userId;

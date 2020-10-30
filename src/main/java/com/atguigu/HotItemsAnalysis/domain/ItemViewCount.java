@@ -1,4 +1,4 @@
-package com.atguigu.HotItemsAnalysis.selfFunction;
+package com.atguigu.HotItemsAnalysis.domain;
 
 public class ItemViewCount {
     public Long itemId;

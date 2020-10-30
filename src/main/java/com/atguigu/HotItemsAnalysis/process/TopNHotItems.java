@@ -1,5 +1,6 @@
-package com.atguigu.HotItemsAnalysis.selfFunction;
+package com.atguigu.HotItemsAnalysis.process;
 
+import com.atguigu.HotItemsAnalysis.domain.ItemViewCount;
 import org.apache.flink.api.common.state.ListState;
 import org.apache.flink.api.common.state.ListStateDescriptor;
 import org.apache.flink.api.java.tuple.Tuple;
