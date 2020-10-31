@@ -2,7 +2,7 @@ package com.atguigu.HotItemsAnalysis;
 
 import com.atguigu.HotItemsAnalysis.aggregate.CountAgg;
 import com.atguigu.HotItemsAnalysis.domain.ItemViewCount;
-import com.atguigu.HotItemsAnalysis.domain.UserBehavior;
+import com.atguigu.domain.UserBehavior;
 import com.atguigu.HotItemsAnalysis.process.TopNHotItems;
 import com.atguigu.HotItemsAnalysis.window.*;
 import org.apache.flink.api.common.functions.FilterFunction;

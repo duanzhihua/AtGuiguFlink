@@ -44,7 +44,7 @@ public class TopNHotItems extends KeyedProcessFunction<Tuple, ItemViewCount,Stri
         while (iter.hasNext()){
             allItems.add(iter.next());
         }
-            itemState.clear();
+        itemState.clear();
         Collections.sort(allItems,new Comparator<ItemViewCount>() {
             @Override
             public int compare(ItemViewCount o1, ItemViewCount o2) {

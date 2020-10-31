@@ -1,4 +1,4 @@
-package com.atguigu.HotItemsAnalysis.domain;
+package com.atguigu.domain;
 
 public class UserBehavior {
     public Long userId;

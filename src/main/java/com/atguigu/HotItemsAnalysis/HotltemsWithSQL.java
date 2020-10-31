@@ -1,6 +1,6 @@
 package com.atguigu.HotItemsAnalysis;
 
-import com.atguigu.HotItemsAnalysis.domain.UserBehavior;
+import com.atguigu.domain.UserBehavior;
 import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.streaming.api.TimeCharacteristic;
