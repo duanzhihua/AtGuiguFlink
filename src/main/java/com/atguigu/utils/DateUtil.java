@@ -12,7 +12,13 @@ import java.util.Date;
  * @date: 2020/10/30 21:35
  */
 public class DateUtil {
-    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+    private static SimpleDateFormat sdf;
+    public DateUtil(){
+        this.sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+    }
+    public DateUtil(String format){
+        this.sdf = new SimpleDateFormat(format);
+    }
     public static String date2String(Date date){
         return sdf.format(date);
     }
